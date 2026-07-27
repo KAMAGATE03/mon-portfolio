@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kamagaté Matagari</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <style>
+        /* ----- Variables & Reset ----- */
+        :root {
+            --primary: #e654b0;
+            --primary-dark: #c73d94;
+            --secondary: #3f3d56;
+            --bg: #f9f9fc;
+            --text: #2d2e3e;
+            --card-bg: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --radius: 16px;
+            --transition: 0.3s ease;
+            --gold: #f5b342;
+        }
+
+        [data-theme="dark"] {
+            --bg: #1a1a2e;
+            --text: #eaeaea;
+            --card-bg: #252540;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background var(--transition), color var(--transition);
+            padding-top: 70px;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ----- Bouton retour haut ----- */
+        .back-to-top {
+            position: fixed;
+            bottom: 90px;
+            right: 25px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 999;
+            transition: transform 0.2s, opacity 0.3s;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .back-to-top:hover {
+            transform: scale(1.1);
+        }
+
+        /* ----- Thème toggle ----- */
+        .theme-toggle {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 999;
+            transition: transform 0.2s;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* ----- Header ----- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            transition: background var(--transition);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        .nav-links a {
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* ----- Hero ----- */
+        #hero {
+            min-height: calc(100vh - 70px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 0;
+        }
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .hero-text h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .hero-text h1 span {
+            color: var(--primary);
+        }
+        .hero-text .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        .hero-text .description {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: background 0.3s, transform 0.2s;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+        .btn-outline:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+        }
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 50%;
+            box-shadow: var(--shadow);
+            border: 5px solid var(--primary);
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+        }
+        .social-icons a {
+            font-size: 24px;
+            color: var(--text);
+            transition: color 0.2s, transform 0.2s;
+        }
+        .social-icons a:hover {
+            color: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        /* ----- Sections communes ----- */
+        section {
+            padding: 80px 0;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            margin: 12px auto 0;
+            border-radius: 4px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-top: -30px;
+            margin-bottom: 40px;
+        }
+
+        /* ----- À propos ----- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .about-text p {
+            margin-bottom: 15px;
+        }
+        .about-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 20px;
+            margin-top: 20px;
+        }
+        .about-info i {
+            color: var(--primary);
+            width: 20px;
+        }
+        .about-image {
+            display: flex;
+            justify-content: center;
+        }
+        .about-image img {
+            max-width: 280px;
+            border-radius: 50%;
+            box-shadow: var(--shadow);
+            border: 4px solid var(--primary);
+            transition: transform 0.3s;
+            width: 100%;
+            height: auto;
+        }
+        .about-image img:hover {
+            transform: scale(1.02);
+        }
+
+        .availability-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        /* ----- Section CV (grille) ----- */
+        #cv {
+            background: var(--card-bg);
+            padding: 40px 0;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.02);
+        }
+        .cv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .cv-card {
+            background: var(--bg);
+            padding: 20px 10px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid transparent;
+        }
+        .cv-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+        .cv-card i {
+            font-size: 50px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .cv-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        .cv-card p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+        .cv-card .btn {
+            font-size: 0.95rem;
+            padding: 10px 25px;
+        }
+        .cv-card .btn i {
+            font-size: 1rem;
+            margin-right: 8px;
+        }
+
+        /* ----- Compétences (détaillées) ----- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        .skill-category {
+            background: var(--card-bg);
+            padding: 25px 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+        .skill-category h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+        .skill-category ul li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+        .skill-category ul li i {
+            width: 20px;
+            color: var(--primary);
+        }
+
+        .soft-skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .soft-skill {
+            background: var(--card-bg);
+            padding: 15px 10px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        /* ----- Technologies (logos) ----- */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 20px;
+            justify-items: center;
+        }
+        .tech-item {
+            background: var(--card-bg);
+            padding: 20px 10px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            width: 100%;
+            transition: transform 0.3s;
+        }
+        .tech-item:hover {
+            transform: translateY(-8px);
+        }
+        .tech-item i {
+            font-size: 40px;
+            color: var(--primary);
+        }
+        .tech-item span {
+            display: block;
+            margin-top: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        /* ----- Expérience (Timeline) ----- */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-left: 40px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--primary);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 30px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -28px;
+            top: 6px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid var(--card-bg);
+            box-shadow: 0 0 0 3px var(--primary);
+        }
+        .timeline-item .date {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .timeline-item h3 {
+            font-size: 1.2rem;
+        }
+        .timeline-item .company {
+            font-weight: 500;
+            opacity: 0.8;
+        }
+        .timeline-item ul {
+            list-style: disc;
+            padding-left: 20px;
+            margin-top: 8px;
+        }
+        .timeline-item ul li {
+            margin-bottom: 5px;
+        }
+
+        /* ----- Services ----- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+        .service-card {
+            background: var(--card-bg);
+            padding: 30px 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+        }
+        .service-card i {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .service-card h3 {
+            font-size: 1.1rem;
+        }
+
+        /* ----- Projets ----- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        .project-info {
+            padding: 20px;
+        }
+        .project-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        .project-info p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        .project-tags span {
+            background: var(--primary);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* ----- Compteurs ----- */
+        .counters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .counter-item {
+            background: var(--card-bg);
+            padding: 25px 10px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .counter-item .number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .counter-item .label {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* ----- Contact ----- */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        .contact-info p {
+            margin-bottom: 15px;
+        }
+        .contact-info i {
+            color: var(--primary);
+            width: 25px;
+        }
+        .contact-info a {
+            color: var(--primary);
+            transition: color 0.2s;
+        }
+        .contact-info a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        .contact-form {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            background: var(--bg);
+            color: var(--text);
+            transition: border 0.3s;
+            outline: none;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--primary);
+        }
+        .contact-form textarea {
+            height: 140px;
+            resize: vertical;
+        }
+        .contact-form button {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            width: 100%;
+        }
+        .contact-form button:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+
+        /* ----- Footer ----- */
+        footer {
+            background: var(--card-bg);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            transition: background var(--transition);
+        }
+        footer .footer-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        footer .footer-title {
+            font-weight: 300;
+            margin: 5px 0 15px;
+        }
+        footer .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 15px 0;
+        }
+        footer .footer-links a {
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        footer .footer-links a:hover {
+            color: var(--primary);
+        }
+        footer .footer-copy {
+            font-size: 0.85rem;
+            opacity: 0.6;
+        }
+
+        /* ----- Responsive ----- */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                gap: 15px;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--card-bg);
+                padding: 25px 20px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+                text-align: center;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-image img {
+                width: 200px;
+                height: 200px;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .social-icons {
+                justify-content: center;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .about-info {
+                grid-template-columns: 1fr;
+                justify-items: center;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .timeline {
+                padding-left: 20px;
+            }
+            .timeline-item {
+                padding-left: 20px;
+            }
+            .timeline-item::before {
+                left: -18px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Bouton retour en haut -->
+    <button class="back-to-top" id="backToTop" aria-label="Retour en haut">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Bouton thème -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- ===================== HEADER ===================== -->
+    <header>
+        <nav>
+            <div class="logo">KM</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero">Accueil</a></li>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#cv">CV</a></li>
+                <li><a href="#skills">Compétences</a></li>
+                <li><a href="#experience">Expérience</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projets</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===================== HERO ===================== -->
+    <section id="hero">
+        <div class="container hero-content">
+            <div class="hero-text" data-aos="fade-right">
+                <h1>Bonjour, je suis <span>Kamagaté Matagari</span></h1>
+                <p class="subtitle">Développeuse Data &amp; IA | Data Analyste</p>
+                <p class="description">
+                    Je conçois des applications web et mobiles, développe des solutions basées sur l'Intelligence Artificielle et l'analyse de données, et transforme les données en outils d'aide à la décision pour répondre à des besoins concrets.
+                </p>
+                <div class="hero-buttons">
+                    <a href="cv_Kamagate_Matagari.pdf" class="btn btn-primary" download>
+                        <i class="fas fa-file-pdf"></i> Télécharger mon CV
+                    </a>
+                    <a href="#projects" class="btn btn-outline">Voir mes projets</a>
+                    <a href="#contact" class="btn btn-outline">Me contacter</a>
+                </div>
+               
+            </div>
+            <div class="hero-image" data-aos="fade-left">
+                <img src="c:\Users\simplon\Downloads\Kama.png" alt="Kamagaté Matagari" />
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== À PROPOS ===================== -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">À propos de moi</h2>
+            <div class="about-grid">
+                <div class="about-text" data-aos="fade-right">
+                    <p>
+                        Je suis <strong>Kamagaté Matagari</strong>, Développeuse Data &amp; IA, Développeuse Full Stack et Data Analyste.
+                    </p>
+                    <p>
+                        Actuellement stagiaire en Développement Data &amp; Intelligence Artificielle chez <strong>Simplon Côte d'Ivoire</strong>, je développe des solutions innovantes basées sur les données et l'intelligence artificielle. Je poursuis également une Licence en E-administration et Transformation Digitale à l'<strong>Université Virtuelle de Côte d'Ivoire (UVCI)</strong>.
+                    </p>
+                    <p>
+                        Curieuse, rigoureuse et orientée résultats, j'aime concevoir des applications performantes et exploiter les données pour résoudre des problématiques concrètes.
+                    </p>
+                    <div class="about-info">
+                        <div><i class="fas fa-map-marker-alt"></i> Côte d'Ivoire</div>
+                        <div><i class="fas fa-graduation-cap"></i> UVCI</div>
+                        <div><i class="fas fa-briefcase"></i> Stagiaire Data &amp; IA chez Simplon CI</div>
+                        <div><i class="fas fa-globe"></i> Disponible pour des opportunités</div>
+                    </div>
+                    <div>
+                        <span class="availability-badge"><i class="fas fa-check-circle"></i> Disponible pour un stage, une alternance ou un premier emploi</span>
+                    </div>
+                </div>
+                <div class="about-image" data-aos="fade-left">
+                    <img src="c:\Users\simplon\Downloads\Kama.png" alt="Kamagaté Matagari" />
+                </div>
+            </div>
+
+            <!-- Compteurs animés -->
+            <div class="counters-grid" data-aos="fade-up">
+                <div class="counter-item">
+                    <div class="number" data-count="4">0</div>
+                    <div class="label">Projets réalisés</div>
+                </div>
+                <div class="counter-item">
+                    <div class="number" data-count="4">0</div>
+                    <div class="label">Technologies maîtrisées</div>
+                </div>
+                <div class="counter-item">
+                    <div class="number" data-count="1">0</div>
+                    <a href="c:\Users\simplon\Downloads\IBM certificat python.pdf" class="btn btn-outline" download>
+                        <i class="fas fa-download"></i> Voir la certification
+                    </a>
+                    <div class="label">Certifications </div>
+                </div>
+                <div class="counter-item">
+                    <div class="number" data-count="9">0</div>
+                    <div class="label">Mois d'expérience</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== SECTION CV (4 CARTES) ===================== -->
+    <section id="cv">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Mes CV</h2>
+            <p class="section-subtitle" data-aos="fade-up">
+                Téléchargez la version de mon curriculum vitae qui correspond le mieux à vos besoins.
+            </p>
+            <div class="cv-grid" data-aos="fade-up">
+
+                <!-- CARTE CV 1 : Complet -->
+                <div class="cv-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-file-pdf"></i>
+                    <h3>CV Complet</h3>
+                    <p>Version détaillée de mon parcours professionnel, compétences et projets.</p>
+                    <a href="cv_Kamagate_Matagari.pdf" class="btn btn-primary" download>
+                        <i class="fas fa-download"></i> Télécharger
+                    </a>
+                </div>
+
+                <!-- CARTE CV 2 : Data & IA -->
+                <div class="cv-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-file-pdf"></i>
+                    <h3>CV Data &amp; IA</h3>
+                    <p>Axé sur mes compétences en analyse de données, machine learning et intelligence artificielle.</p>
+                    <a href="cv_Kamagate_Matagari_Data.pdf" class="btn btn-primary" download>
+                        <i class="fas fa-download"></i> Télécharger
+                    </a>
+                </div>
+
+                <!-- CARTE CV 3 : Full Stack -->
+                <div class="cv-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-file-pdf"></i>
+                    <h3>CV Développement Full Stack</h3>
+                    <p>Spécialisé dans le développement web, mobile et les API REST.</p>
+                    <a href="cv_Kamagate_Matagari_FullStack.pdf" class="btn btn-primary" download>
+                        <i class="fas fa-download"></i> Télécharger
+                    </a>
+                </div>
+
+                <!-- CARTE CV 4 : Développement Data IA (NOUVEAU) -->
+                <div class="cv-card" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fas fa-robot"></i> <!-- Icône IA -->
+                    <h3>CV Développement Data &amp; IA</h3>
+                    <p>Conçu pour les postes en Data Science, Intelligence Artificielle et développement de solutions intelligentes.</p>
+                    <a href="c:\Users\simplon\Downloads\KM CV.pdf" class="btn btn-primary" download>
+                        <i class="fas fa-download"></i> Télécharger
+                    </a>
+                </div>
+
+                <!-- Vous pouvez ajouter d'autres cartes ici en copiant le bloc ci-dessus -->
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== COMPÉTENCES ===================== -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Compétences</h2>
+            <p class="section-subtitle" data-aos="fade-up">Un aperçu de mes savoir-faire techniques et humains</p>
+
+            <div class="skills-grid" data-aos="fade-up">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Langages</h3>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Python</li>
+                        <li><i class="fas fa-check-circle"></i> JavaScript</li>
+                        <li><i class="fas fa-check-circle"></i> SQL</li>
+                        <li><i class="fas fa-check-circle"></i> HTML5</li>
+                        <li><i class="fas fa-check-circle"></i> CSS3</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-laptop-code"></i> Développement</h3>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Développement Web</li>
+                        <li><i class="fas fa-check-circle"></i> Développement Full Stack</li>
+                        <li><i class="fas fa-check-circle"></i> Flutter</li>
+                        <li><i class="fas fa-check-circle"></i> API REST</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-chart-line"></i> Data</h3>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Analyse de données</li>
+                        <li><i class="fas fa-check-circle"></i> Business Intelligence</li>
+                        <li><i class="fas fa-check-circle"></i> Machine Learning</li>
+                        <li><i class="fas fa-check-circle"></i> Visualisation de données</li>
+                        <li><i class="fas fa-check-circle"></i> Nettoyage et préparation de données</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-database"></i> Bases de données</h3>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> MySQL</li>
+                        <li><i class="fas fa-check-circle"></i> MongoDB</li>
+                        <li><i class="fas fa-check-circle"></i> SQLite</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-tools"></i> Outils</h3>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> Power BI</li>
+                        <li><i class="fas fa-check-circle"></i> Git / GitHub</li>
+                        <li><i class="fas fa-check-circle"></i> Visual Studio Code</li>
+                        <li><i class="fas fa-check-circle"></i> Android Studio</li>
+                        <li><i class="fas fa-check-circle"></i> Figma</li>
+                        <li><i class="fas fa-check-circle"></i> Microsoft Excel / Word / PowerPoint</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Soft Skills -->
+            <h3 style="text-align:center; margin:40px 0 20px; color:var(--primary);">Soft Skills</h3>
+            <div class="soft-skills-grid" data-aos="fade-up">
+                <div class="soft-skill">Esprit d'analyse</div>
+                <div class="soft-skill">Résolution de problèmes</div>
+                <div class="soft-skill">Travail en équipe</div>
+                <div class="soft-skill">Communication</div>
+                <div class="soft-skill">Organisation</div>
+                <div class="soft-skill">Autonomie</div>
+                <div class="soft-skill">Curiosité</div>
+                <div class="soft-skill">Adaptabilité</div>
+                <div class="soft-skill">Apprentissage continu</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== EXPÉRIENCE & FORMATION ===================== -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Expérience &amp; Formation</h2>
+
+            <h3 style="color:var(--primary); margin:30px 0 15px;">Expérience professionnelle</h3>
+            <div class="timeline" data-aos="fade-up">
+                <div class="timeline-item">
+                    <span class="date">2026 – Présent</span>
+                    <h3>Stagiaire Développement Data &amp; Intelligence Artificielle</h3>
+                    <p class="company">Simplon Côte d'Ivoire</p>
+                    <ul>
+                        <li>Développement d'applications Python</li>
+                        <li>Analyse, nettoyage et traitement de données</li>
+                        <li>Manipulation de bases de données SQL et NoSQL</li>
+                        <li>Développement d'outils d'automatisation</li>
+                        <li>Création de tableaux de bord</li>
+                        <li>Collaboration sur des projets innovants</li>
+                        <li>Utilisation de Git et GitHub</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="color:var(--primary); margin:50px 0 15px;">Formation</h3>
+            <div class="timeline" data-aos="fade-up">
+                <div class="timeline-item">
+                    <span class="date">2024 – 2026</span>
+                    <h3>Licence en E-administration et Transformation Digitale</h3>
+                    <p class="company">Université Virtuelle de Côte d'Ivoire (UVCI)</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="date">2025 – 2026</span>
+                    <h3>Formation Développement Data &amp; Intelligence Artificielle</h3>
+                    <p class="company">Simplon Côte d'Ivoire</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== SERVICES ===================== -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Mes services</h2>
+            <div class="services-grid" data-aos="fade-up">
+                <div class="service-card"><i class="fas fa-globe"></i><h3>Développement Web</h3></div>
+                <div class="service-card"><i class="fas fa-mobile-alt"></i><h3>Développement Mobile</h3></div>
+                <div class="service-card"><i class="fas fa-code"></i><h3>Développement Full Stack</h3></div>
+                <div class="service-card"><i class="fas fa-chart-pie"></i><h3>Analyse de données</h3></div>
+                <div class="service-card"><i class="fas fa-chart-bar"></i><h3>Création de tableaux de bord Power BI</h3></div>
+                <div class="service-card"><i class="fas fa-brain"></i><h3>Intelligence Artificielle</h3></div>
+                <div class="service-card"><i class="fas fa-lightbulb"></i><h3>Business Intelligence</h3></div>
+                <div class="service-card"><i class="fas fa-paint-brush"></i><h3>Conception UI/UX</h3></div>
+                <div class="service-card"><i class="fab fa-python"></i><h3>Développement de solutions Python</h3></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== PROJETS ===================== -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Mes projets</h2>
+            <div class="projects-grid" data-aos="fade-up">
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/400x200/6c63ff/ffffff?text=App+Mobile+IA" alt="Application Mobile IA" />
+                    <div class="project-info">
+                        <h3>Application Mobile IA</h3>
+                        <p>Développement d'une application Android avec Flutter intégrant un assistant conversationnel intelligent.</p>
+                        <div class="project-tags">
+                            <span>Flutter</span><span>JavaScript</span><span>API REST</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" style="padding:8px 20px; font-size:14px;">Voir le projet</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/400x200/6c63ff/ffffff?text=Bot+Python" alt="Bot Python" />
+                    <div class="project-info">
+                        <h3>Bot Python</h3>
+                        <p>Développement d'un bot Python capable d'extraire automatiquement des données depuis des sites web et de générer des fichiers CSV.</p>
+                        <div class="project-tags">
+                            <span>Python</span><span>BeautifulSoup</span><span>Selenium</span><span>CSV</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" style="padding:8px 20px; font-size:14px;">Voir le projet</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <img src="https://via.placeholder.com/400x200/6c63ff/ffffff?text=Dashboard+Power+BI" alt="Dashboard Power BI" />
+                    <div class="project-info">
+                        <h3>Dashboard Power BI</h3>
+                        <p>Création de tableaux de bord interactifs permettant la visualisation et l'analyse des données.</p>
+                        <div class="project-tags">
+                            <span>Power BI</span><span>SQL</span><span>Excel</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" style="padding:8px 20px; font-size:14px;">Voir le projet</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== CONTACT ===================== -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Contact</h2>
+            <div class="contact-wrapper" data-aos="fade-up">
+                <div class="contact-info">
+                    <p><i class="fas fa-user"></i> <strong>Kamagaté Matagari</strong></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:matagarik33@gmail.com">matagarik33@gmail.com</a></p>
+                    <p><i class="fas fa-phone"></i> <a href="tel:+2250503785057">+225 0503785057</a> / <a href="tel:+2250502054029">+225 0502054029</a></p>
+                    <p><i class="fas fa-map-marker-alt"></i> Côte d'Ivoire</p>
+                    <p><i class="fab fa-linkedin"></i> <a href="https://linkedin.com/in/votre-profil" target="_blank">linkedin.com/in/votre-profil</a></p>
+                    <p><i class="fab fa-github"></i> <a href="https://github.com/votre-profil" target="_blank">github.com/votre-profil</a></p>
+                    <p style="margin-top:20px;"><span class="availability-badge" style="background:var(--primary);"><i class="fas fa-check-circle"></i> Disponible pour un stage, une alternance ou un premier emploi</span></p>
+                </div>
+                <form class="contact-form" id="contactForm" action="https://formsubmit.co/matagarik33@gmail.com" method="POST">
+                    <input type="hidden" name="_captcha" value="false" />
+                    <input type="text" name="nom" placeholder="Votre nom" required />
+                    <input type="email" name="email" placeholder="Votre email" required />
+                    <input type="text" name="sujet" placeholder="Sujet" />
+                    <textarea name="message" placeholder="Votre message..." required></textarea>
+                    <button type="submit">Envoyer <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer>
+        <div class="footer-name">Kamagaté Matagari</div>
+        <div class="footer-title">Développeuse Data &amp; IA | Développeuse Full Stack | Data Analyste</div>
+        <div class="footer-links">
+            <a href="mailto:matagarik33@gmail.com"><i class="fas fa-envelope"></i> matagarik33@gmail.com</a>
+            <a href="tel:+2250503785057"><i class="fas fa-phone"></i> +225 0503785057</a>
+            <a href="https://linkedin.com/in/votre-profil" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="https://github.com/votre-profil" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+            <span><i class="fas fa-map-marker-alt"></i> Côte d'Ivoire</span>
+        </div>
+        <div class="footer-copy">
+            &copy; 2026 Kamagaté Matagari — Tous droits réservés.<br />
+            Merci de votre visite.
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // ----- Initialisation AOS -----
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            once: true
+        });
+
+        // ----- Menu mobile -----
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // ----- Thème (sombre par défaut) -----
+        const themeToggle = document.getElementById('themeToggle');
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        updateIcon(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            let newTheme = theme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        function updateIcon(theme) {
+            const icon = themeToggle.querySelector('i');
+            icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // ----- Bouton retour en haut -----
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ----- Compteurs animés -----
+        const counters = document.querySelectorAll('.number');
+        const speed = 200;
+
+        const animateCounter = (counter) => {
+            const target = parseInt(counter.getAttribute('data-count'));
+            const increment = target / speed;
+            let current = 0;
+            const update = () => {
+                current += increment;
+                if (current < target) {
+                    counter.innerText = Math.ceil(current);
+                    requestAnimationFrame(update);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            update();
+        };
+
+        const counterItems = document.querySelectorAll('.counter-item');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const number = entry.target.querySelector('.number');
+                    if (number && !number.classList.contains('counted')) {
+                        number.classList.add('counted');
+                        animateCounter(number);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counterItems.forEach(item => observer.observe(item));
+
+        console.log('Portfolio Kamagaté Matagari prêt !');
+    </script>
+</body>
+</html>
