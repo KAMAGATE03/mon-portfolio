@@ -1,1405 +1,429 @@
 <!DOCTYPE html>
+
 <html lang="fr">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kamagaté Matagari</title>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <!-- AOS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+<meta charset="UTF-8">
 
-    <style>
-        /* ----- Variables & Reset ----- */
-        :root {
-            --primary: #e654b0;
-            --primary-dark: #c73d94;
-            --secondary: #3f3d56;
-            --bg: #f9f9fc;
-            --text: #2d2e3e;
-            --card-bg: #ffffff;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
-            --radius: 16px;
-            --transition: 0.3s ease;
-            --gold: #f5b342;
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        [data-theme="dark"] {
-            --bg: #1a1a2e;
-            --text: #eaeaea;
-            --card-bg: #252540;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.6);
-        }
+<meta name="description" content="Portfolio de Kamagaté Matagari : Data, IA, développement web et mobile, analyse de données et démonstrations vidéo.">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta name="author" content="Kamagaté Matagari">
 
-        html {
-            scroll-behavior: smooth;
-        }
+<meta name="theme-color" content="#f7f7fb">
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            transition: background var(--transition), color var(--transition);
-            padding-top: 70px;
-            overflow-x: hidden;
-        }
+<meta property="og:type" content="website">
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        ul {
-            list-style: none;
-        }
+<meta property="og:title" content="Kamagaté Matagari — Portfolio Data, IA & Développement">
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+<meta property="og:description" content="Data Analyste junior · Développement Data & IA. Projets, vidéos de démonstration et CV.">
 
-        /* ----- Bouton retour haut ----- */
-        .back-to-top {
-            position: fixed;
-            bottom: 90px;
-            right: 25px;
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 22px;
-            cursor: pointer;
-            box-shadow: var(--shadow);
-            z-index: 999;
-            transition: transform 0.2s, opacity 0.3s;
-            opacity: 0;
-            pointer-events: none;
-        }
-        .back-to-top.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .back-to-top:hover {
-            transform: scale(1.1);
-        }
+<title>Kamagaté Matagari — Portfolio Data, IA & Développement</title>
 
-        /* ----- Thème toggle ----- */
-        .theme-toggle {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 22px;
-            cursor: pointer;
-            box-shadow: var(--shadow);
-            z-index: 999;
-            transition: transform 0.2s;
-        }
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
-        /* ----- Header ----- */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: var(--card-bg);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            z-index: 1000;
-            transition: background var(--transition);
-        }
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--primary);
-        }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-        .nav-links a {
-            font-weight: 500;
-            font-size: 15px;
-            transition: color 0.2s;
-            position: relative;
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s;
-        }
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        .nav-links a:hover {
-            color: var(--primary);
-        }
+<style>
 
-        .menu-toggle {
-            display: none;
-            font-size: 28px;
-            cursor: pointer;
-        }
+:root{--bg:#f7f7fb;--surface:#fff;--ink:#1c2036;--muted:#697087;--line:#e8e8f1;--primary:#6741d9;--primary-dark:#5030b4;--primary-soft:#eee9ff;--pink:#e654a9;--mint:#e5f7f1;--shadow:0 16px 44px rgba(34,26,75,.08);--radius:22px;--max:1200px}
 
-        /* ----- Hero ----- */
-        #hero {
-            min-height: calc(100vh - 70px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 60px 0;
-        }
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-        .hero-text h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .hero-text h1 span {
-            color: var(--primary);
-        }
-        .hero-text .subtitle {
-            font-size: 1.2rem;
-            font-weight: 300;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-        .hero-text .description {
-            font-size: 1rem;
-            opacity: 0.9;
-            margin-bottom: 25px;
-        }
-        .hero-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 500;
-            transition: background 0.3s, transform 0.2s;
-            border: 2px solid var(--primary);
-            background: transparent;
-            color: var(--primary);
-            cursor: pointer;
-            text-align: center;
-            font-size: 0.95rem;
-        }
-        .btn-primary {
-            background: var(--primary);
-            color: #fff;
-            border-color: var(--primary);
-        }
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
-        }
-        .btn-outline:hover {
-            background: var(--primary);
-            color: #fff;
-            transform: translateY(-3px);
-        }
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:90px}body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}img{display:block;max-width:100%}.container{width:min(var(--max),calc(100% - 40px));margin-inline:auto}.section{padding:86px 0}.section-head{max-width:740px;margin:0 auto 38px;text-align:center}.eyebrow{display:inline-flex;gap:9px;align-items:center;color:var(--primary);font-size:.75rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase}.eyebrow:before{content:"";width:22px;height:2px;background:var(--pink);border-radius:3px}.section-head h2{font:800 clamp(1.8rem,3vw,2.5rem)/1.2 Manrope,sans-serif;letter-spacing:-.045em;margin:12px 0}.section-head p{color:var(--muted);font-size:.95rem}
 
-        /* ----- Boutons projets (plus petits) ----- */
-        .btn-project {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-weight: 500;
-            font-size: 13px;
-            transition: background 0.3s, transform 0.2s;
-            border: 2px solid var(--primary);
-            background: var(--primary);
-            color: #fff;
-            cursor: pointer;
-            text-align: center;
-        }
-        .btn-project:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
+.topbar{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:10px}.brand{display:flex;align-items:center;gap:11px;font:800 1rem Manrope,sans-serif;white-space:nowrap}.brand-mark{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;color:#fff;background:linear-gradient(135deg,var(--primary),#9d72f8);box-shadow:0 8px 18px #6741d933}.brand-name small{display:block;font:500 .7rem "DM Sans",sans-serif;color:var(--muted)}.nav-links{display:flex;gap:20px;align-items:center;flex-wrap:wrap}.nav-links a{font-size:.82rem;font-weight:700;color:#626980}.nav-links a:hover{color:var(--primary)}.nav-cta{padding:9px 14px;border-radius:11px;background:var(--ink);color:#fff!important}
 
-        .hero-image {
-            display: flex;
-            justify-content: center;
-        }
-        .hero-image img {
-            max-width: 100%;
-            border-radius: 50%;
-            box-shadow: var(--shadow);
-            border: 5px solid var(--primary);
-            width: 300px;
-            height: 300px;
-            object-fit: cover;
-        }
+.hero{padding:64px 0 35px;position:relative;isolation:isolate}.hero:before{content:"";position:absolute;z-index:-1;top:0;right:0;width:50%;height:450px;background:radial-gradient(circle,#e9e0ff 0,transparent 70%);pointer-events:none}.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:55px;min-height:440px}.hero-kicker{display:inline-flex;align-items:center;gap:9px;padding:7px 12px;border:1px solid #e0d7ff;border-radius:100px;background:#fff;color:var(--primary);font-size:.76rem;font-weight:800;margin-bottom:20px}.status-dot{height:8px;width:8px;border-radius:50%;background:#29b783;box-shadow:0 0 0 4px #29b78320}.hero h1{font:800 clamp(2.6rem,5vw,4.2rem)/1.08 Manrope,sans-serif;letter-spacing:-.06em}.hero h1 span{display:block;color:var(--primary)}.hero-role{font:700 1.03rem Manrope,sans-serif;margin:18px 0 12px;color:#41465e}.hero-copy{max-width:590px;color:var(--muted)}.hero-actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:25px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 17px;border:1px solid transparent;border-radius:12px;font-size:.85rem;font-weight:800;transition:.2s}.btn:hover{transform:translateY(-2px)}.btn-primary{background:var(--primary);color:#fff;box-shadow:0 10px 22px #6741d928}.btn-primary:hover{background:var(--primary-dark)}.btn-secondary{background:#fff;border-color:var(--line)}.btn-secondary:hover{border-color:#c8baf8;color:var(--primary)}.social-row{display:flex;align-items:center;gap:10px;margin-top:22px}.social-row>span{color:var(--muted);font-size:.8rem}.social-link{width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--line);border-radius:11px;background:#fff;color:#636982}.social-link:hover{color:var(--primary);border-color:#cbbdfb}
 
-        .social-icons {
-            margin-top: 20px;
-            display: flex;
-            gap: 20px;
-        }
-        .social-icons a {
-            font-size: 24px;
-            color: var(--text);
-            transition: color 0.2s, transform 0.2s;
-        }
-        .social-icons a:hover {
-            color: var(--primary);
-            transform: translateY(-4px);
-        }
+.hero-visual{position:relative;max-width:440px;width:100%;justify-self:end}.visual-halo{position:absolute;inset:5% 8% 2%;background:linear-gradient(135deg,#e8e0ff,#ffebf5);filter:blur(24px);border-radius:45% 55% 62% 38%;z-index:-1}.profile-card{background:#fff;padding:14px;border:1px solid #ffffffd9;border-radius:27px;box-shadow:0 28px 75px #39257d24;transform:rotate(1deg)}.portrait-wrap{height:300px;overflow:hidden;border-radius:20px;background:linear-gradient(145deg,#e7ddff,#f8e7f3 70%,#e2f5ef);position:relative}.portrait-wrap img{width:100%;height:100%;object-fit:cover;object-position:center 34%;position:relative;z-index:2}.avatar-fallback{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font:800 5rem Manrope,sans-serif;background:linear-gradient(140deg,#6841d8,#a280ed 55%,#e654a9)}.portrait-caption{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 6px 4px}.portrait-caption strong{font:800 .96rem Manrope,sans-serif}.portrait-caption small{display:block;color:var(--muted);font-size:.76rem;margin-top:3px}.mini-badge{display:flex;align-items:center;gap:6px;padding:7px 9px;border-radius:11px;background:var(--mint);color:#187757;font-size:.7rem;font-weight:800;white-space:nowrap}.floating-note{position:absolute;z-index:3;padding:11px 13px;border-radius:14px;background:#fff;box-shadow:var(--shadow);display:flex;gap:10px;align-items:center}.floating-note i{width:35px;height:35px;display:grid;place-items:center;border-radius:11px;background:var(--primary-soft);color:var(--primary)}.floating-note b{display:block;font:800 .76rem Manrope,sans-serif}.floating-note small{display:block;color:var(--muted);font-size:.68rem}.note-one{top:50px;left:-35px}.note-two{bottom:68px;right:-30px}.quick-strip{padding-top:25px}.strip-inner{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);background:#fff;border-radius:17px;overflow:hidden;box-shadow:0 8px 25px #21164808}.strip-item{display:flex;align-items:center;justify-content:center;gap:9px;padding:16px 10px;border-right:1px solid var(--line);font-size:.78rem;font-weight:800;text-align:center}.strip-item:last-child{border:0}.strip-item i{color:var(--primary)}
 
-        /* ----- Sections communes ----- */
-        section {
-            padding: 80px 0;
-        }
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-        }
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: var(--primary);
-            margin: 12px auto 0;
-            border-radius: 4px;
-        }
+.about-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:32px;align-items:stretch}.about-callout{border-radius:var(--radius);padding:28px;background:linear-gradient(145deg,#241b45,#3d2b70);color:#fff;min-height:260px;display:flex;flex-direction:column;justify-content:space-between}.quote-icon{width:44px;height:44px;border-radius:14px;background:#ffffff17;display:grid;place-items:center}.about-callout p{font:700 1.15rem/1.55 Manrope,sans-serif;max-width:310px;margin:22px 0}.about-callout small{color:#cfc5f4}.about-copy{padding:14px 0}.about-copy p{color:var(--muted);margin-bottom:13px}.about-copy strong{color:var(--ink)}.about-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.pill{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid var(--line);background:#fff;border-radius:100px;font-size:.72rem;font-weight:700;color:#525871}.pill i{color:var(--primary)}
 
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.1rem;
-            opacity: 0.8;
-            margin-top: -30px;
-            margin-bottom: 40px;
-        }
+.projects-section,.journey-section{background:#fff;border-block:1px solid var(--line)}.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:17px;align-items:stretch}.project-card{min-width:0;background:#fff;border:1px solid var(--line);border-radius:17px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s,border-color .2s}.project-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#d7cdf9}.project-cover{height:130px;position:relative;overflow:hidden;padding:15px;display:flex;align-items:center;justify-content:center}.cover-finance{background:linear-gradient(135deg,#1d2343,#4e3b91)}.cover-excel{background:linear-gradient(135deg,#144b37,#54a17e)}.project-type{position:absolute;top:10px;left:10px;color:#fff;background:#ffffff20;border:1px solid #ffffff35;border-radius:100px;padding:4px 7px;font-size:.59rem;font-weight:800;text-transform:uppercase}.cover-symbol{width:65px;height:65px;display:grid;place-items:center;color:#fff;font-size:1.8rem;border-radius:20px;background:#ffffff18;border:1px solid #ffffff35;transform:rotate(-5deg)}.project-video{width:100%;background:#191629;overflow:hidden;border-bottom:1px solid var(--line)}.video-label{display:flex;align-items:center;gap:7px;padding:8px 10px;background:#f7f5ff;color:var(--primary);font-size:.66rem;font-weight:800;border-bottom:1px solid #eeeaf9}.project-video iframe,.project-video video{display:block;width:100%;height:auto;aspect-ratio:16/9;border:0;background:#191629}.project-video video{object-fit:contain}.video-error{padding:10px;background:#fff1f1;color:#a32626;font-size:.72rem;overflow-wrap:anywhere}.video-error code{font-size:.68rem}.video-open-link{display:flex;align-items:center;justify-content:center;gap:7px;padding:8px;background:#fff;color:var(--primary);font-size:.68rem;font-weight:800;border-top:1px solid #eeeaf9}.video-open-link:hover{text-decoration:underline;background:#fbfaff}.project-body{display:flex;flex-direction:column;flex:1;padding:14px}.project-status{display:inline-flex;align-self:flex-start;padding:4px 7px;border-radius:7px;background:#f2efff;color:var(--primary);font-size:.6rem;font-weight:800;margin-bottom:8px}.project-body h3{font:800 .91rem/1.35 Manrope,sans-serif;letter-spacing:-.02em;margin-bottom:7px}.project-body p{color:var(--muted);font-size:.75rem;line-height:1.6;flex:1}.tags{display:flex;flex-wrap:wrap;gap:5px;margin:12px 0 13px}.tags span{background:#f5f5fa;border:1px solid #eeeef5;border-radius:6px;padding:4px 6px;color:#62677e;font-size:.61rem;font-weight:700}.project-actions{display:flex;align-items:stretch;gap:7px;flex-wrap:wrap;margin-top:auto}.project-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 9px;border:1px solid var(--primary);border-radius:8px;background:var(--primary);color:#fff;font-size:.68rem;font-weight:800;line-height:1.3}.project-link.secondary{background:#fff;border-color:#d9cff9;color:var(--primary)}.project-link.secondary:hover{background:var(--primary-soft)}
 
-        /* ----- À propos ----- */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-        .about-text p {
-            margin-bottom: 15px;
-        }
-        .about-info {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px 20px;
-            margin-top: 20px;
-        }
-        .about-info i {
-            color: var(--primary);
-            width: 20px;
-        }
-        .about-image {
-            display: flex;
-            justify-content: center;
-        }
-        .about-image img {
-            max-width: 280px;
-            border-radius: 50%;
-            box-shadow: var(--shadow);
-            border: 4px solid var(--primary);
-            transition: transform 0.3s;
-            width: 100%;
-            height: auto;
-        }
-        .about-image img:hover {
-            transform: scale(1.02);
-        }
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.skill-card{padding:20px 18px;background:#fff;border:1px solid var(--line);border-radius:17px}.skill-icon{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:var(--primary-soft);color:var(--primary);font-size:1rem;margin-bottom:14px}.skill-card h3{font:800 .95rem Manrope,sans-serif;margin-bottom:8px}.skill-card p{font-size:.77rem;color:var(--muted)}.skill-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.skill-list span{font-size:.66rem;font-weight:700;padding:5px 7px;border:1px solid var(--line);border-radius:7px;color:#555b73;background:#fcfcff}
 
-        .availability-badge {
-            display: inline-block;
-            background: var(--primary);
-            color: #fff;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-top: 10px;
-        }
+.journey-layout{display:grid;grid-template-columns:1.08fr .92fr;gap:35px}.timeline{position:relative;padding-left:25px}.timeline:before{content:"";position:absolute;left:5px;top:8px;bottom:10px;width:2px;background:#ded6fa}.timeline-item{position:relative;margin-bottom:20px;padding:0 0 7px 16px}.timeline-item:before{content:"";position:absolute;left:-26px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--primary);border:4px solid #eee9ff}.timeline-date{font-size:.7rem;font-weight:800;color:var(--primary)}.timeline-item h3{font:800 .92rem Manrope,sans-serif;margin:5px 0}.timeline-item .place{font-size:.78rem;color:var(--muted);font-weight:700}.timeline-item p{font-size:.76rem;color:var(--muted);margin-top:7px}.cert-panel{border-radius:19px;padding:23px;background:#f8f6ff;border:1px solid #e9e2ff}.cert-panel h3{font:800 1.05rem Manrope,sans-serif;margin-bottom:14px}.cert-list{display:grid;gap:9px}.cert-item{display:flex;gap:9px;align-items:center;padding:11px;background:#fff;border:1px solid #eeeaf9;border-radius:12px;min-width:0}.cert-icon{width:34px;height:34px;border-radius:10px;background:#f1edff;color:var(--primary);display:grid;place-items:center;flex-shrink:0}.cert-item strong{display:block;font-size:.75rem}.cert-item small{display:block;color:var(--muted);font-size:.68rem}.cert-item>i:last-child{margin-left:auto;color:var(--primary);font-size:.73rem}
 
-        /* ----- Section CV (grille) ----- */
-        #cv {
-            background: var(--card-bg);
-            padding: 40px 0;
-            box-shadow: inset 0 0 30px rgba(0,0,0,0.02);
-        }
-        .cv-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 20px;
-        }
-        .cv-card {
-            background: var(--bg);
-            padding: 20px 10px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid transparent;
-        }
-        .cv-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--primary);
-        }
-        .cv-card i {
-            font-size: 50px;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        .cv-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 8px;
-        }
-        .cv-card p {
-            font-size: 0.95rem;
-            opacity: 0.8;
-            margin-bottom: 20px;
-        }
-        .cv-card .btn {
-            font-size: 0.95rem;
-            padding: 10px 25px;
-        }
-        .cv-card .btn i {
-            font-size: 1rem;
-            margin-right: 8px;
-        }
+.cv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.cv-card{border:1px solid var(--line);border-radius:16px;background:#fff;padding:18px;display:flex;flex-direction:column;min-height:200px}.cv-file-icon{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:#fff0f3;color:#d94568;font-size:1rem;margin-bottom:14px}.cv-card h3{font:800 .85rem Manrope,sans-serif;margin-bottom:7px}.cv-card p{font-size:.73rem;color:var(--muted);margin-bottom:15px;flex:1}.cv-card a{font-size:.75rem;font-weight:800;color:var(--primary);display:flex;align-items:center;gap:7px}
 
-        /* ----- Compétences (détaillées) ----- */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
-        .skill-category {
-            background: var(--card-bg);
-            padding: 25px 20px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
-        }
-        .skill-category:hover {
-            transform: translateY(-5px);
-        }
-        .skill-category h3 {
-            margin-bottom: 15px;
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-        .skill-category ul li {
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.95rem;
-        }
-        .skill-category ul li i {
-            width: 20px;
-            color: var(--primary);
-        }
+.contact-section{padding-bottom:70px}.contact-box{display:grid;grid-template-columns:.95fr 1.05fr;gap:30px;border-radius:25px;padding:32px;background:linear-gradient(140deg,#21183f,#3c2b6b);color:#fff;box-shadow:0 24px 60px #25134424}.contact-copy .eyebrow{color:#d4c7ff}.contact-copy h2{font:800 clamp(1.8rem,3vw,2.5rem)/1.15 Manrope,sans-serif;letter-spacing:-.045em;margin:13px 0}.contact-copy>p{color:#d1cbe2;font-size:.86rem}.contact-lines{display:grid;gap:11px;margin-top:22px}.contact-line{display:flex;gap:10px;align-items:center;color:#eee9ff;font-size:.8rem}.contact-line i{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#ffffff15;color:#d8caff}.contact-socials{display:flex;gap:8px;margin-top:20px}.contact-socials a{width:36px;height:36px;display:grid;place-items:center;border:1px solid #ffffff2c;border-radius:10px;color:#fff}.contact-form{background:#fff;border-radius:17px;padding:22px;color:var(--ink)}.contact-form h3{font:800 1.05rem Manrope,sans-serif;margin-bottom:5px}.contact-form>p{color:var(--muted);font-size:.76rem;margin-bottom:15px}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field{margin-bottom:10px}.field label{display:block;font-size:.7rem;font-weight:800;margin-bottom:5px;color:#555b73}.field input,.field textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px 11px;background:#fafaff;color:var(--ink);font-size:.78rem;outline:none}.field input:focus,.field textarea:focus{border-color:#ac97f6;box-shadow:0 0 0 3px #6741d914}.field textarea{min-height:90px;resize:vertical}.contact-form button{width:100%;cursor:pointer}.privacy-note{font-size:.66rem;color:var(--muted);text-align:center;margin-top:8px}.footer{padding:22px 0;border-top:1px solid var(--line);background:#fff}.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:15px;color:var(--muted);font-size:.72rem}.footer strong{color:var(--ink)}.footer a{color:var(--primary);font-weight:700}
 
-        .soft-skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .soft-skill {
-            background: var(--card-bg);
-            padding: 15px 10px;
-            border-radius: var(--radius);
-            text-align: center;
-            box-shadow: var(--shadow);
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
+:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
 
-        /* ----- Technologies (logos) ----- */
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 20px;
-            justify-items: center;
-        }
-        .tech-item {
-            background: var(--card-bg);
-            padding: 20px 10px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            text-align: center;
-            width: 100%;
-            transition: transform 0.3s;
-        }
-        .tech-item:hover {
-            transform: translateY(-8px);
-        }
-        .tech-item i {
-            font-size: 40px;
-            color: var(--primary);
-        }
-        .tech-item span {
-            display: block;
-            margin-top: 8px;
-            font-weight: 500;
-            font-size: 14px;
-        }
+@media(max-width:1150px){.skills-grid,.cv-grid{grid-template-columns:repeat(2,1fr)}.hero-grid{gap:35px}.nav-links{gap:12px}}
 
-        /* ----- Expérience (Timeline) ----- */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-            padding-left: 40px;
-        }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 15px;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: var(--primary);
-        }
-        .timeline-item {
-            position: relative;
-            margin-bottom: 40px;
-            padding-left: 30px;
-        }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -28px;
-            top: 6px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: var(--primary);
-            border: 3px solid var(--card-bg);
-            box-shadow: 0 0 0 3px var(--primary);
-        }
-        .timeline-item .date {
-            font-weight: 600;
-            color: var(--primary);
-        }
-        .timeline-item h3 {
-            font-size: 1.2rem;
-        }
-        .timeline-item .company {
-            font-weight: 500;
-            opacity: 0.8;
-        }
-        .timeline-item ul {
-            list-style: disc;
-            padding-left: 20px;
-            margin-top: 8px;
-        }
-        .timeline-item ul li {
-            margin-bottom: 5px;
-        }
+@media(max-width:800px){.section{padding:65px 0}.nav{align-items:flex-start;flex-direction:column}.nav-links{width:100%;gap:8px 15px}.hero-grid{grid-template-columns:1fr;gap:35px}.hero-visual{justify-self:center;max-width:400px;width:88%}.about-layout,.journey-layout,.contact-box{grid-template-columns:1fr}.strip-inner{grid-template-columns:repeat(2,1fr)}.strip-item:nth-child(2){border-right:0}.strip-item:nth-child(-n+2){border-bottom:1px solid var(--line)}.note-one{left:-15px}.note-two{right:-15px}}
 
-        /* ----- Services ----- */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-        }
-        .service-card {
-            background: var(--card-bg);
-            padding: 30px 20px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: transform 0.3s;
-        }
-        .service-card:hover {
-            transform: translateY(-8px);
-        }
-        .service-card i {
-            font-size: 40px;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-        .service-card h3 {
-            font-size: 1.1rem;
-        }
+@media(max-width:520px){.container{width:calc(100% - 26px)}.section{padding:55px 0}.nav-links a,.nav-links{font-size:.75rem}.brand-name{font-size:.88rem}.hero h1{font-size:2.55rem}.hero-actions{flex-direction:column;align-items:stretch}.hero-actions .btn{width:100%}.portrait-wrap{height:240px}.floating-note{padding:8px 9px}.floating-note i{width:30px;height:30px}.note-one{top:30px;left:-15px}.note-two{bottom:50px;right:-15px}.strip-item{padding:13px 7px;font-size:.68rem}.projects-grid,.skills-grid,.cv-grid{grid-template-columns:1fr}.project-cover{height:145px}.contact-box{padding:16px;border-radius:20px}.contact-form{padding:16px}.form-row{grid-template-columns:1fr;gap:0}.footer-inner{flex-direction:column;text-align:center}}
 
-        /* ----- Projets (avec media) ----- */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        .project-card {
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-        }
-        .project-media {
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-            background: #ddd;
-        }
-        .project-media img,
-        .project-media iframe {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            border: 0;
-        }
-        .project-info {
-            padding: 20px;
-        }
-        .project-info h3 {
-            font-size: 1.2rem;
-            margin-bottom: 8px;
-        }
-        .project-info p {
-            font-size: 0.95rem;
-            opacity: 0.8;
-            margin-bottom: 15px;
-        }
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-        .project-tags span {
-            background: var(--primary);
-            color: #fff;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-        }
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
 
-        /* ----- Compteurs ----- */
-        .counters-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-            text-align: center;
-        }
-        .counter-item {
-            background: var(--card-bg);
-            padding: 25px 10px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-        .counter-item .number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        .counter-item .label {
-            font-size: 1rem;
-            opacity: 0.8;
-        }
+[hidden]{display:none!important}
 
-        /* ----- Contact ----- */
-        .contact-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: start;
-        }
-        .contact-info p {
-            margin-bottom: 15px;
-        }
-        .contact-info i {
-            color: var(--primary);
-            width: 25px;
-        }
-        .contact-info a {
-            color: var(--primary);
-            transition: color 0.2s;
-        }
-        .contact-info a:hover {
-            color: var(--primary-dark);
-            text-decoration: underline;
-        }
-        .contact-form {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 14px 18px;
-            margin-bottom: 18px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-family: inherit;
-            font-size: 1rem;
-            background: var(--bg);
-            color: var(--text);
-            transition: border 0.3s;
-            outline: none;
-        }
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            border-color: var(--primary);
-        }
-        .contact-form textarea {
-            height: 140px;
-            resize: vertical;
-        }
-        .contact-form button {
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            padding: 14px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-            width: 100%;
-        }
-        .contact-form button:hover {
-            background: var(--primary-dark);
-            transform: scale(1.02);
-        }
+.adm-btn{position:fixed;right:22px;bottom:22px;width:50px;height:50px;border:0;border-radius:50%;background:var(--primary);color:#fff;font-size:18px;cursor:pointer;box-shadow:var(--shadow);z-index:9000}
 
-        /* ----- Footer ----- */
-        footer {
-            background: var(--card-bg);
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 40px;
-            border-top: 1px solid rgba(0,0,0,0.05);
-            transition: background var(--transition);
-        }
-        footer .footer-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        footer .footer-title {
-            font-weight: 300;
-            margin: 5px 0 15px;
-        }
-        footer .footer-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 15px 0;
-        }
-        footer .footer-links a {
-            font-size: 0.95rem;
-            transition: color 0.2s;
-        }
-        footer .footer-links a:hover {
-            color: var(--primary);
-        }
-        footer .footer-copy {
-            font-size: 0.85rem;
-            opacity: 0.6;
-        }
+.adm-ov{position:fixed;inset:0;background:rgba(20,14,40,.55);z-index:9100;display:none;align-items:center;justify-content:center;padding:20px}.adm-ov.on{display:flex}
 
-        /* ----- Responsive ----- */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                gap: 15px;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: var(--card-bg);
-                padding: 25px 20px;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-                text-align: center;
-            }
-            .nav-links.active {
-                display: flex;
-            }
+.adm-panel{position:relative;background:#fff;border-radius:18px;padding:26px;width:100%;max-width:560px;max-height:88vh;overflow:auto}
 
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .hero-image img {
-                width: 200px;
-                height: 200px;
-            }
-            .hero-buttons {
-                justify-content: center;
-            }
-            .social-icons {
-                justify-content: center;
-            }
+.adm-panel h3{font:800 1.1rem Manrope,sans-serif;margin-bottom:6px;padding-right:28px}.adm-panel p{font-size:.8rem;color:var(--muted);margin-bottom:14px}
 
-            .about-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .about-info {
-                grid-template-columns: 1fr;
-                justify-items: center;
-            }
+.adm-panel label{display:block;font-size:.74rem;font-weight:800;color:#555b73;margin-bottom:12px}
 
-            .contact-wrapper {
-                grid-template-columns: 1fr;
-            }
+.adm-panel input{display:block;width:100%;margin-top:5px;border:1px solid var(--line);border-radius:9px;padding:10px 11px;font-size:.8rem;background:#fafaff;outline:none}.adm-panel input:focus{border-color:#ac97f6}
 
-            .section-title {
-                font-size: 1.8rem;
-            }
+.adm-x{position:absolute;top:12px;right:16px;border:0;background:none;font-size:26px;cursor:pointer;color:var(--muted)}
 
-            .timeline {
-                padding-left: 20px;
-            }
-            .timeline-item {
-                padding-left: 20px;
-            }
-            .timeline-item::before {
-                left: -18px;
-            }
+.adm-row{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 10px}.adm-msg{min-height:18px;color:var(--primary)!important}
 
-            .footer-links {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
+#admCode{background:#f7f7fb;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:.72rem;white-space:pre-wrap;word-break:break-all;margin-bottom:10px}
 
-        @media (max-width: 480px) {
-            .hero-text h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+</style>
+
 </head>
+
 <body>
 
-    <!-- Bouton retour en haut -->
-    <button class="back-to-top" id="backToTop" aria-label="Retour en haut">
-        <i class="fas fa-chevron-up"></i>
-    </button>
+<header class="topbar"><nav class="nav container" aria-label="Navigation principale">
 
-    <!-- Bouton thème -->
-    <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème">
-        <i class="fas fa-moon"></i>
-    </button>
+<a class="brand" href="#accueil"><span class="brand-mark">KM</span><span class="brand-name">Kamagaté Matagari<small>Data · IA · Développement</small></span></a>
 
-    <!-- ===================== HEADER ===================== -->
-    <header>
-        <nav>
-            <div class="logo">KM</div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#hero">Accueil</a></li>
-                <li><a href="#about">À propos</a></li>
-                <li><a href="#cv">CV</a></li>
-                <li><a href="#skills">Compétences</a></li>
-                <li><a href="#experience">Expérience</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#projects">Projets</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
-            </div>
-        </nav>
-    </header>
+<div class="nav-links"><a href="#profil">Profil</a><a href="#projets">Projets</a><a href="#competences">Compétences</a><a href="#parcours">Parcours</a><a href="#cv">CV</a><a class="nav-cta" href="#contact">Me contacter</a></div>
 
-    <!-- ===================== HERO ===================== -->
-    <section id="hero">
-        <div class="container hero-content">
-            <div class="hero-text" data-aos="fade-right">
-                <h1>Bonjour, je suis <span>Kamagaté Matagari</span></h1>
-                <p class="subtitle">Développeuse Data &amp; IA | Data Analyste</p>
-                <p class="description">
-                    Je conçois des applications web et mobiles, développe des solutions basées sur l'Intelligence Artificielle et l'analyse de données, et transforme les données en outils d'aide à la décision pour répondre à des besoins concrets.
-                </p>
-                <div class="hero-buttons">
-                    <a href="file:///C:/Users/simplon/Downloads/CV%20KAMAGATE%20MATAGARI%20DATA%20ANALYSTE.pdf" class="btn btn-primary" download>
-                        <i class="fas fa-file-pdf"></i> Télécharger mon CV
-                    </a>
-                    <a href="#projects" class="btn btn-outline">Voir mes projets</a>
-                    <a href="#contact" class="btn btn-outline">Me contacter</a>
-                </div>
-            </div>
-            <div class="hero-image" data-aos="fade-left">
-                <img src="Kama.png" alt="Kamagaté Matagari" />
-            </div>
-        </div>
-    </section>
-
-    <!-- ===================== À PROPOS ===================== -->
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">À propos de moi</h2>
-            <div class="about-grid">
-                <div class="about-text" data-aos="fade-right">
-                    <p>
-                    <strong>Kamagaté Matagari</strong>, Développeuse Data &amp; IA, Développeuse Full Stack et Data Analyste.
-                    </p>
-                    <p>
-                        Actuellement stagiaire en Développement Data &amp; Intelligence Artificielle chez <strong>Simplon Côte d'Ivoire</strong>, je développe des solutions innovantes basées sur les données et l'intelligence artificielle. Je poursuis également une Licence en E-administration et Transformation Digitale à l'<strong>Université Virtuelle de Côte d'Ivoire (UVCI)</strong>.
-                    </p>
-                    <p>
-                        Curieuse, rigoureuse et orientée résultats, j'aime concevoir des applications performantes et exploiter les données pour résoudre des problématiques concrètes.
-                    </p>
-                    <div class="about-info">
-                        <div><i class="fas fa-map-marker-alt"></i> Côte d'Ivoire</div>
-                        <div><i class="fas fa-graduation-cap"></i> UVCI</div>
-                        <div><i class="fas fa-briefcase"></i> Stagiaire Data &amp; IA chez Simplon CI</div>
-                        <div><i class="fas fa-globe"></i> Disponible pour des opportunités</div>
-                    </div>
-                    <div>
-                        <span class="availability-badge"><i class="fas fa-check-circle"></i> Disponible pour un stage, une alternance ou un premier emploi</span>
-                    </div>
-                </div>
-                <div class="about-image" data-aos="fade-left">
-                    <img src="Kama.png" alt="Kamagaté Matagari" />
-                </div>
-            </div>
-
-            <!-- Compteurs animés -->
-            <div class="counters-grid" data-aos="fade-up">
-                <div class="counter-item">
-                    <div class="number" data-count="1">IA générative</div>
-                     <a href="file:///C:/Users/simplon/Downloads/Les_bases_de_l_IA_Certificate.pdf" class="btn btn-outline" download>
-                    <i class="fas fa-download"></i> Voir la certification
-                     </a>
-                    <div class="label">Certification IA générative</div>
-
-                   
-                    
-                </div>
-                <div class="counter-item">
-                    <div class="number" data-count="1">0</div>
-                     <a href="file:///C:/Users/simplon/Downloads/Les_bases_de_l_IA_Certificate.pdff" class="btn btn-outline" download>
-                      <i class="fas fa-download"></i> Voir la certification</a>
-                    <div class="label">IA base </div>
-                </div>
-                <div class="counter-item">
-                    <div class="number" data-count="1">0</div>
-                    <a href="file:///C:/Users/simplon/Downloads/IBM%20certificat%20python.pdf" class="btn btn-outline" download>
-                        <i class="fas fa-download"></i> Voir la certification
-                    </a>
-                    <div class="label">Certifications IBM Python</div>
-                </div>
-                <div class="counter-item">
-                    <div class="number" data-count="1">0</div>
-                    <a href="c:\Users\simplon\Downloads\Coursera sheet.pdf" class="btn btn-outline" download>
-                        <i class="fas fa-download"></i> Voir la certification
-                    </a>
-                    <div class="label">Certificat courser google sheet</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    
-    <section id="cv">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Mes CV</h2>
-            <p class="section-subtitle" data-aos="fade-up">
-                Téléchargez la version de mon curriculum vitae qui correspond le mieux à vos besoins.
-            </p>
-            <div class="cv-grid" data-aos="fade-up">
-
-                <div class="cv-card" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-file-pdf"></i>
-                    <h3>CV Complet</h3>
-                    <p>Version détaillée de mon parcours professionnel, compétences et projets.</p>
-                    <a href="file:///C:/Users/simplon/Downloads/CV%20KAMAGATE%20MATAGARI%20DATA%20ANALYSTE.pdf" class="btn btn-primary" download>
-                        <i class="fas fa-download"></i> Télécharger
-                    </a>
-                </div>
-
-            
-                <div class="cv-card" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-file-pdf"></i>
-                    <h3>CV Data &amp; IA</h3>
-                    <p>Axé sur mes compétences en analyse de données, machine learning et intelligence artificielle.</p>
-                    <a href="file:///C:/Users/simplon/Downloads/CV%20KAMAGATE%20MATAGARI%20DATA%20ANALYSTE.pdf" class="btn btn-primary" download>
-                        <i class="fas fa-download"></i> Télécharger
-                    </a>
-                </div>
-
-                
-                <div class="cv-card" data-aos="fade-up" data-aos-delay="300">
-                    <i class="fas fa-file-pdf"></i>
-                    <h3>CV Développeuse Data et IA junior</h3>
-                    <p>Spécialisé dans le développement D'applications web, mobile, desktop, data et d'IA.</p>
-                    <a href="assets/CV Kamagaté Matagari développeuse data IA junior 2.pdf" class="btn btn-primary" download>
-                        <i class="fas fa-download"></i> Télécharger
-                    </a>
-                </div>
-
-                
-                <div class="cv-card" data-aos="fade-up" data-aos-delay="400">
-                    <i class="fas fa-robot"></i>
-                    <h3>CV Data Analyste &amp; IA</h3>
-                    <p>Conçu pour les postes en Data Analyste, Intelligence Artificielle et développement de solutions intelligentes.</p>
-                    <a href="assets/CV kamagaté data analyste 1.pdf" class="btn btn-primary" download>
-                        <i class="fas fa-download"></i> Télécharger
-                    </a>
-                </div>
+</nav></header>
 
 
-                 <div class="cv-card" data-aos="fade-up" data-aos-delay="400">
-                    <i class="fas fa-robot"></i>
-                    <h3>CV Dévéloppeuse data &amp; web, mobile et desktop</h3> 
-                    <p>Spécialisée dans le développement d'applications web, mobile et desktop, ainsi que dans l'analyse de données et l'intelligence artificielle.</p>
-                    <a href="assets/CV kamagaté developpeuse web et mobile 3.pdf" class="btn btn-primary" download>
-                        <i class="fas fa-download"></i> Télécharger
-                    </a>
-                </div>
 
-            </div>
-        </div>
-    </section>
+<main>
 
-    <!-- ===================== COMPÉTENCES ===================== -->
-    <section id="skills">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Compétences</h2>
-            <p class="section-subtitle" data-aos="fade-up">Un aperçu de mes savoir-faire techniques et humains</p>
+<section class="hero" id="accueil"><div class="container hero-grid">
 
-            <div class="skills-grid" data-aos="fade-up">
-                <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Langages</h3>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Python</li>
-                        <li><i class="fas fa-check-circle"></i> JavaScript</li>
-                        <li><i class="fas fa-check-circle"></i> SQL</li>
-                        <li><i class="fas fa-check-circle"></i> HTML5</li>
-                        <li><i class="fas fa-check-circle"></i> CSS3</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-laptop-code"></i> Développement</h3>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Développement Web</li>
-                        <li><i class="fas fa-check-circle"></i> Développement Full Stack</li>
-                        <li><i class="fas fa-check-circle"></i> Flutter</li>
-                        <li><i class="fas fa-check-circle"></i> API REST</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-chart-line"></i> Data</h3>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Analyse de données</li>
-                        <li><i class="fas fa-check-circle"></i> Business Intelligence</li>
-                        <li><i class="fas fa-check-circle"></i> Machine Learning</li>
-                        <li><i class="fas fa-check-circle"></i> Visualisation de données</li>
-                        <li><i class="fas fa-check-circle"></i> Nettoyage et préparation de données</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-database"></i> Bases de données</h3>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> MySQL</li>
-                        <li><i class="fas fa-check-circle"></i> MongoDB</li>
-                        <li><i class="fas fa-check-circle"></i> SQLite</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3><i class="fas fa-tools"></i> Outils</h3>
-                    <ul>
-                        <li><i class="fas fa-check-circle"></i> Power BI</li>
-                        <li><i class="fas fa-check-circle"></i> Git / GitHub</li>
-                        <li><i class="fas fa-check-circle"></i> Visual Studio Code</li>
-                        <li><i class="fas fa-check-circle"></i> Android Studio</li>
-                        <li><i class="fas fa-check-circle"></i> Figma</li>
-                        <li><i class="fas fa-check-circle"></i> Microsoft Excel / Word / PowerPoint</li>
-                    </ul>
-                </div>
-            </div>
+<div class="hero-content">
 
-            <!-- Soft Skills -->
-            <h3 style="text-align:center; margin:40px 0 20px; color:var(--primary);">Soft Skills</h3>
-            <div class="soft-skills-grid" data-aos="fade-up">
-                <div class="soft-skill">Esprit d'analyse</div>
-                <div class="soft-skill">Résolution de problèmes</div>
-                <div class="soft-skill">Travail en équipe</div>
-                <div class="soft-skill">Communication</div>
-                <div class="soft-skill">Organisation</div>
-                <div class="soft-skill">Autonomie</div>
-                <div class="soft-skill">Curiosité</div>
-                <div class="soft-skill">Adaptabilité</div>
-                <div class="soft-skill">Apprentissage continu</div>
-            </div>
-        </div>
-    </section>
+<span class="hero-kicker"><span class="status-dot"></span> À la recherche d'opportunités junior</span>
 
-    <!-- ===================== EXPÉRIENCE & FORMATION ===================== -->
-    <section id="experience">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Expérience &amp; Formation</h2>
+<h1>Je suis <span>Kamagaté Matagari.</span></h1>
 
-            <h3 style="color:var(--primary); margin:30px 0 15px;">Expérience professionnelle</h3>
-            <div class="timeline" data-aos="fade-up">
-                <div class="timeline-item">
-                    <span class="date">2026 – Présent</span>
-                    <h3>Stagiaire Développement Data &amp; Intelligence Artificielle</h3>
-                    <p class="company">Simplon Côte d'Ivoire</p>
-                    <ul>
-                        <li>Développement d'applications Python</li>
-                        <li>Analyse, nettoyage et traitement de données</li>
-                        <li>Manipulation de bases de données SQL et NoSQL</li>
-                        <li>Développement d'outils d'automatisation</li>
-                        <li>Création de tableaux de bord</li>
-                        <li>Collaboration sur des projets innovants</li>
-                        <li>Utilisation de Git et GitHub</li>
-                    </ul>
-                </div>
-            </div>
+<p class="hero-role">Data Analyste junior · Développement Data & IA</p>
 
-            <h3 style="color:var(--primary); margin:50px 0 15px;">Formation</h3>
-            <div class="timeline" data-aos="fade-up">
-                <div class="timeline-item">
-                    <span class="date">2024 – 2026</span>
-                    <h3>Licence en E-administration et Transformation Digitale</h3>
-                    <p class="company">Université Virtuelle de Côte d'Ivoire (UVCI)</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="date">2025 – 2026</span>
-                    <h3>Formation Développement Data &amp; Intelligence Artificielle</h3>
-                    <p class="company">Simplon Côte d'Ivoire</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<p class="hero-copy">J’explore les données pour en tirer des informations utiles et je conçois des solutions numériques qui répondent à des besoins concrets, de l’analyse à l’application.</p>
 
-    <!-- ===================== SERVICES ===================== -->
-    <section id="services">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Mes services</h2>
-            <div class="services-grid" data-aos="fade-up">
-                <div class="service-card"><i class="fas fa-globe"></i><h3>Développement Web</h3></div>
-                <div class="service-card"><i class="fas fa-mobile-alt"></i><h3>Développement Mobile</h3></div>
-                <div class="service-card"><i class="fas fa-code"></i><h3>Développement Full Stack</h3></div>
-                <div class="service-card"><i class="fas fa-chart-pie"></i><h3>Analyse de données</h3></div>
-                <div class="service-card"><i class="fas fa-chart-bar"></i><h3>Création de tableaux de bord Power BI</h3></div>
-                <div class="service-card"><i class="fas fa-brain"></i><h3>Intelligence Artificielle</h3></div>
-                <div class="service-card"><i class="fas fa-lightbulb"></i><h3>Business Intelligence</h3></div>
-                <div class="service-card"><i class="fas fa-paint-brush"></i><h3>Conception UI/UX</h3></div>
-                <div class="service-card"><i class="fab fa-python"></i><h3>Développement de solutions Python</h3></div>
-            </div>
-        </div>
-    </section>
+<div class="hero-actions"><a class="btn btn-primary" href="#projets"><i class="fa-solid fa-folder-open"></i> Découvrir mes projets</a><a class="btn btn-secondary" href="#cv"><i class="fa-regular fa-file-pdf"></i> Voir mes CV</a></div>
 
-    <!-- ===================== PROJETS ===================== -->
-    <section id="projects">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Mes projets</h2>
-            <div class="projects-grid" data-aos="fade-up">
+<div class="social-row"><span>Retrouvons-nous sur</span>
 
-              
-                <div class="project-card" data-video="https://drive.google.com/file/d/1p1d_YGwr5fev9UFJt02Su9JXRwT0oD9n/view?usp=drive_link">
-                    <div class="project-media">
-                        <img src="https://via.placeholder.com/400x200/6c63ff/ffffff?text=Video+Drive" alt="Vidéo projet" />
-                    </div>
-                    <div class="project-info">
-                        <h3>Application Mobile Flutter</h3>
-                        <p>Démonstration de mon application avec une vidéo hébergée sur Google Drive.</p>
-                        <div class="project-tags">
-                            <span>Flutter</span><span>Firebase</span><span>IA</span>
-                        </div>
-                        <a href="#" class="btn-project">Voir le projet</a>
-                    </div>
-                </div>
+<a class="social-link" href="https://www.linkedin.com/in/matagarik-kamagat%C3%A9-6a1a29348" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+
+<a class="social-link" href="https://github.com/matagarik33" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+
+<a class="social-link" href="mailto:matagarik33@gmail.com" aria-label="Envoyer un email"><i class="fa-regular fa-envelope"></i></a></div>
+
+</div>
+
+<div class="hero-visual"><div class="visual-halo"></div>
+
+<div class="profile-card"><div class="portrait-wrap"><img src="Kama.png" alt="Portrait de Kamagaté Matagari" width="440" height="300" fetchpriority="high" onerror="this.style.display='none'"><div class="avatar-fallback">KM</div></div>
+
+<div class="portrait-caption"><div><strong>Kamagaté Matagari</strong><small>Data · IA · Applications numériques</small></div><span class="mini-badge"><i class="fa-solid fa-circle-check"></i> Disponible</span></div></div>
+
+<div class="floating-note note-one"><i class="fa-solid fa-chart-column"></i><div><b>Data Analytics</b><small>Analyser · Visualiser</small></div></div>
+
+<div class="floating-note note-two"><i class="fa-solid fa-wand-magic-sparkles"></i><div><b>IA & automatisation</b><small>Imaginer des solutions utiles</small></div></div>
+
+</div></div>
+
+<div class="container quick-strip"><div class="strip-inner"><div class="strip-item"><i class="fa-solid fa-chart-line"></i> Analyse de données</div><div class="strip-item"><i class="fa-solid fa-chart-pie"></i> Excel & Power BI</div><div class="strip-item"><i class="fa-solid fa-brain"></i> Data & Intelligence artificielle</div><div class="strip-item"><i class="fa-solid fa-laptop-code"></i> Applications web & mobile</div></div></div>
+
+</section>
 
 
- <div class="project-card" data-video="https://drive.google.com/file/d/1SEsdKHIOCQdhNKSpHco-dpeZbHc7RXhs/view?usp=drive_link">
-                    <div class="project-media">
-                        <img src="https://via.placeholder.com/400x200/6c63ff/ffffff?text=Video+Drive" alt="Vidéo projet" />
-                    </div>
-                    <div class="project-info">
-                        <h3>Analyse de donnée avec POWER BI</h3>
-                        <p>Démonstration en vidéo hébergée sur Google Drive en analyse de données.</p>
-                        <div class="project-tags">
-                            <span>Power BI</span><span>SQL</span><span>Excel</span>
-                        </div>
-                        <a href="#" class="btn-project">Voir le projet</a>
-                    </div>
-                </div>
 
-                
-                <div class="project-card" data-video="https://drive.google.com/file/d/17q46aBvY3kgs1csEeVBgMJ45_Es6-iZU/view?usp=drive_link">
-                    <div class="project-media">
-                        <img src="https://via.placeholder.com/400x200/6c63ff/ffffff?text=Application+Python" alt="Application Python" />
-                    </div>
-                    <div class="project-info">
-                        <h3>Application d'analyse de donnée</h3>
-                        <p>Application d'extraction des données des fichiers CSV à l'aide d'une IA intégrée.</p>
-                        <div class="project-tags">
-                            <span>Python</span><span>IA</span><span>CSV</span>
-                        </div>
-                        <a href="#" class="btn-project">Voir le projet</a>
-                    </div>
-                </div>
+<section class="section" id="profil"><div class="container">
 
-            
-                <div class="project-card" data-video="">
-                    <div class="project-media">
-                        <img src="https://via.placeholder.com/400x200/6c63ff/ffffff?text=Dashboard+Drive" alt="Dashboard Power BI" />
-                    </div>
-                    <div class="project-info">
-                        <h3>Analyse de donnée avec excel</h3>
-                        <p>Création de tableaux de bord interactifs permettant la visualisation et l'analyse des données.</p>
-                        <div class="project-tags">
-                            <span>Power BI</span><span>SQL</span><span>Excel</span>
-                        </div>
-                        <a href="#" class="btn-project">Voir le projet</a>
-                    </div>
-                </div>
+<div class="section-head"><span class="eyebrow">Mon profil</span><h2>À la croisée de la donnée et du développement</h2><p>Un profil polyvalent, avec une approche orientée apprentissage, résolution de problèmes et création de solutions utiles.</p></div>
 
-            </div>
-        </div>
-    </section>
+<div class="about-layout"><aside class="about-callout"><span class="quote-icon"><i class="fa-solid fa-lightbulb"></i></span><p>« Comprendre les données, simplifier les tâches et transformer une idée en solution concrète. »</p><small>Mon fil conducteur</small></aside>
+
+<div class="about-copy"><p>Je suis en formation en <strong>Développement Data & Intelligence Artificielle chez Simplon Côte d’Ivoire</strong> et je poursuis une <strong>Licence 3 en E-administration et Transformation Digitale</strong> à l’Université Virtuelle de Côte d’Ivoire.</p>
+
+<p>Je développe mes compétences en collecte, nettoyage, préparation, analyse et visualisation de données avec des outils d’analyse et de reporting. Mon parcours en développement me permet également d’aborder les applications web et mobiles, les API et les bases de données.</p>
+
+<p>Je m’intéresse à l’IA générative, au prompt engineering, aux agents IA et à l’automatisation pour améliorer des processus et concevoir des outils adaptés aux besoins.</p>
+
+<div class="about-tags"><span class="pill"><i class="fa-solid fa-location-dot"></i> Côte d’Ivoire</span><span class="pill"><i class="fa-solid fa-graduation-cap"></i> Licence 3</span><span class="pill"><i class="fa-solid fa-people-group"></i> Stage · Junior</span><span class="pill"><i class="fa-solid fa-laptop"></i> Abidjan · À distance</span></div></div></div>
+
+</div></section>
 
 
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">Contact</h2>
-            <div class="contact-wrapper" data-aos="fade-up">
-                <div class="contact-info">
-                    <p><i class="fas fa-user"></i> <strong>Kamagaté Matagari</strong></p>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:matagarik33@gmail.com">matagarik33@gmail.com</a></p>
-                    <p><i class="fas fa-phone"></i> <a href="tel:+2250503785057">+225 0503785057</a> / <a href="tel:+2250502054029">+225 0502054029</a></p>
-                    <p><i class="fas fa-map-marker-alt"></i> Côte d'Ivoire</p>
-                    <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/matagari-kamagat%C3%A9-6a1a29348" target="_blank">linkedin.com/in/matagari-kamagat%C3%A9-6a1a29348</a></p>
-                    <p><i class="fab fa-github"></i> <a href="https://github.com/matagarik33" target="_blank">github.com/matagarik33</a></p>
-                    <p style="margin-top:20px;"><span class="availability-badge" style="background:var(--primary);"><i class="fas fa-check-circle"></i> Disponible pour un stage, une alternance ou un premier emploi</span></p>
-                </div>
-                <form class="contact-form" id="contactForm" action="https://formsubmit.co/matagarik33@gmail.com" method="POST">
-                    <input type="hidden" name="_captcha" value="false" />
-                    <input type="text" name="nom" placeholder="KAMAGATE MATAGARI" required />
-                    <input type="email" name="email" placeholder="matagarik33@gmail.com" required />
-                    <input type="text" name="sujet" placeholder="Sujet" />
-                    <textarea name="message" placeholder="Votre message..." required></textarea>
-                    <button type="submit">Envoyer <i class="fas fa-paper-plane"></i></button>
-                </form>
-            </div>
-        </div>
-    </section>
 
-    
-    <footer>
-        <div class="footer-name">Kamagaté Matagari</div>
-        <div class="footer-title">Développeuse Data &amp; IA | Développeuse Full Stack | Data Analyste</div>
-        <div class="footer-links">
-            <a href="mailto:matagarik33@gmail.com"><i class="fas fa-envelope"></i> matagarik33@gmail.com</a>
-            <a href="tel:+2250503785057"><i class="fas fa-phone"></i> +225 0503785057</a>
-            <a href="https://www.linkedin.com/in/matagari-kamagat%C3%A9-6a1a29348" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            <a href="https://github.com/matagarik33" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            <span><i class="fas fa-map-marker-alt"></i> Côte d'Ivoire</span>
-        </div>
-        <div class="footer-copy">
-            &copy; 2026 Kamagaté Matagari — Tous droits réservés.<br />
-            Merci de votre visite.
-        </div>
-    </footer>
+<section class="section projects-section" id="projets"><div class="container">
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // ----- AOS -----
-        AOS.init({
-            duration: 800,
-            offset: 100,
-            once: true
-        });
+<div class="section-head"><span class="eyebrow">Sélection de projets</span><h2>Ce que je construis et j’explore</h2><p>Chaque démonstration vidéo se lit directement dans la carte du projet.</p></div>
 
-        // ----- Menu mobile -----
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
+<div class="projects-grid" id="projectsGrid"></div>
 
-        // ----- Thème (sombre par défaut) -----
-        const themeToggle = document.getElementById('themeToggle');
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', currentTheme);
-        updateIcon(currentTheme);
+</div></section>
 
-        themeToggle.addEventListener('click', () => {
-            let theme = document.documentElement.getAttribute('data-theme');
-            let newTheme = theme === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateIcon(newTheme);
-        });
 
-        function updateIcon(theme) {
-            const icon = themeToggle.querySelector('i');
-            icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-        }
 
-        // ----- Bouton retour en haut -----
-        const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        });
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+<section class="section" id="competences"><div class="container">
 
-        // ----- Compteurs animés -----
-        const counters = document.querySelectorAll('.number');
-        const speed = 200;
+<div class="section-head"><span class="eyebrow">Compétences</span><h2>Mes outils et domaines de travail</h2></div>
 
-        const animateCounter = (counter) => {
-            const target = parseInt(counter.getAttribute('data-count'));
-            const increment = target / speed;
-            let current = 0;
-            const update = () => {
-                current += increment;
-                if (current < target) {
-                    counter.innerText = Math.ceil(current);
-                    requestAnimationFrame(update);
-                } else {
-                    counter.innerText = target;
-                }
-            };
-            update();
-        };
+<div class="skills-grid" id="skillsGrid"></div>
 
-        const counterItems = document.querySelectorAll('.counter-item');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const number = entry.target.querySelector('.number');
-                    if (number && !number.classList.contains('counted')) {
-                        number.classList.add('counted');
-                        animateCounter(number);
-                    }
-                }
-            });
-        }, { threshold: 0.5 });
+</div></section>
 
-        counterItems.forEach(item => observer.observe(item));
 
-        // ----- CONVERSION DES LIENS GOOGLE DRIVE EN VIDÉO INTÉGRÉE -----
-        document.querySelectorAll('.project-card[data-video]').forEach(card => {
-            let driveUrl = card.getAttribute('data-video');
-            if (!driveUrl) return;
 
-            // Nettoyer l'URL (retirer les paramètres éventuels)
-            let cleanUrl = driveUrl.split('?')[0];
-            let fileId = null;
+<section class="section journey-section" id="parcours"><div class="container">
 
-            // Tenter d'extraire l'ID avec différents formats
-            const matchFile = cleanUrl.match(/\/d\/([^\/]+)/);
-            if (matchFile && matchFile[1]) {
-                fileId = matchFile[1];
-            } else {
-                // Essayer le format open?id=
-                const urlParams = new URLSearchParams(driveUrl.split('?')[1]);
-                if (urlParams.has('id')) {
-                    fileId = urlParams.get('id');
-                } else {
-                    // Essayer le format /folders/ (mais cela ne donnera pas une vidéo)
-                    const matchFolder = cleanUrl.match(/\/folders\/([^\/]+)/);
-                    if (matchFolder && matchFolder[1]) {
-                        fileId = matchFolder[1];
-                        console.warn('Lien vers un dossier Drive, pas une vidéo. Utilisez un lien de fichier.');
-                    }
-                }
-            }
+<div class="section-head"><span class="eyebrow">Parcours</span><h2>Formation et expérience</h2></div>
 
-            if (fileId) {
-                const embedUrl = `https://drive.google.com/file/d/${fileId}/preview`;
-                const mediaContainer = card.querySelector('.project-media');
-                if (mediaContainer) {
-                    mediaContainer.innerHTML = `
-                        <iframe src="${embedUrl}" 
-                                style="width:100%; height:200px; border:0;"
-                                allow="autoplay; encrypted-media"
-                                allowfullscreen>
-                        </iframe>
-                    `;
-                }
-            } else {
-                console.warn('ID de fichier Drive non trouvé pour :', driveUrl);
-            }
-        });
+<div class="journey-layout">
 
-        console.log('Portfolio Kamagaté Matagari prêt !');
-    </script>
+<div class="timeline">
+
+<article class="timeline-item"><span class="timeline-date">2026 — Présent</span><h3>Stagiaire Développeuse Data & IA</h3><div class="place">Simplon Côte d’Ivoire</div><p>Analyse et préparation de données, tableaux de bord, bases de données et découverte d’usages de l’IA générative et de l’automatisation.</p></article>
+
+<article class="timeline-item"><span class="timeline-date">2025 — 2026</span><h3>Formation Développement Data & IA</h3><div class="place">Simplon Côte d’Ivoire</div><p>Développement de compétences autour des données, des applications, de l’intelligence artificielle et des outils numériques.</p></article>
+
+<article class="timeline-item"><span class="timeline-date">En cours</span><h3>Licence 3 — E-administration et Transformation Digitale</h3><div class="place">Université Virtuelle de Côte d’Ivoire</div><p>Parcours universitaire axé sur la transformation digitale et les usages du numérique.</p></article>
+
+</div>
+
+<aside class="cert-panel"><h3>Certifications & apprentissages</h3><div class="cert-list" id="certList"></div></aside>
+
+</div></div></section>
+
+
+
+<section class="section" id="cv"><div class="container">
+
+<div class="section-head"><span class="eyebrow">Candidature</span><h2>Consulter mes CV</h2><p>Choisissez la version la plus pertinente selon le poste.</p></div>
+
+<div class="cv-grid" id="cvGrid"></div>
+
+</div></section>
+
+
+
+<section class="section contact-section" id="contact"><div class="container"><div class="contact-box">
+
+<div class="contact-copy"><span class="eyebrow">Contact</span><h2>Parlons de votre prochain projet.</h2>
+
+<p>Vous recrutez une stagiaire, une Data Analyste junior ou une développeuse junior ? Je serais ravie d’échanger avec vous.</p>
+
+<div class="contact-lines"><div class="contact-line"><i class="fa-regular fa-envelope"></i><a href="mailto:matagarik33@gmail.com">matagarik33@gmail.com</a></div><div class="contact-line"><i class="fa-solid fa-phone"></i><a href="tel:+2250503785057">+225 05 03 78 50 57</a></div><div class="contact-line"><i class="fa-solid fa-location-dot"></i><span>Abidjan, Côte d’Ivoire · Présentiel / à distance</span></div></div>
+
+<div class="contact-socials"><a href="https://www.linkedin.com/in/matagarik-kamagat%C3%A9-6a1a29348" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a><a href="https://github.com/matagarik33" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a><a href="mailto:matagarik33@gmail.com" aria-label="Email"><i class="fa-regular fa-envelope"></i></a></div></div>
+
+<form class="contact-form" action="https://formsubmit.co/matagarik33@gmail.com" method="POST"><h3>Envoyer un message</h3><p>Décrivez brièvement votre besoin ou l’opportunité.</p>
+
+<input type="hidden" name="_subject" value="Nouveau message depuis le portfolio de Kamagaté Matagari"><input type="hidden" name="_captcha" value="true"><input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+<div class="form-row"><div class="field"><label for="name">Votre nom</label><input id="name" name="name" type="text" placeholder="Nom et prénom" autocomplete="name" required></div><div class="field"><label for="email">Votre email</label><input id="email" name="email" type="email" placeholder="nom@entreprise.com" autocomplete="email" required></div></div>
+
+<div class="field"><label for="subject">Sujet</label><input id="subject" name="subject" type="text" placeholder="Stage, collaboration, projet…" required></div>
+
+<div class="field"><label for="message">Votre message</label><textarea id="message" name="message" placeholder="Bonjour Matagari…" required></textarea></div>
+
+<button class="btn btn-primary" type="submit"><i class="fa-regular fa-paper-plane"></i> Envoyer le message</button><div class="privacy-note">L’envoi du formulaire dépend du service FormSubmit.</div></form>
+
+</div></div></section>
+
+</main>
+
+
+
+<footer class="footer"><div class="container footer-inner"><span><strong>Kamagaté Matagari</strong> · Data, IA & Développement</span><span>© 2026 · Portfolio professionnel</span><a href="#accueil">Retour en haut ↑</a></div></footer>
+
+
+
+<script>
+
+/* ===== LIENS « TESTER EN LIGNE » (laisse "" tant que non disponible) ===== */
+
+const DEMO = {meteo: "https://meteo-bqvq.onrender.com", safeAbidjan: "https://safeabidjan.onrender.com", smart: "", powerbi: "", python: "", flutter: "", n8n: "", excel: ""};
+
+/* Aperçu enregistré depuis le panneau ?admin (uniquement dans ton navigateur) */
+
+try { const st = JSON.parse(localStorage.getItem("km_demo") || "{}"); for (const k in st) if (st[k]) DEMO[k] = st[k]; } catch (e) {}
+
+
+
+/* ===== PROJETS ===== (video = chemin relatif vers un fichier dans le dossier videos/) */
+
+const PROJECTS = [
+
+ {k:"meteo",video:"videos/Méteo.mp4",type:"Web · Données",ic:"fa-cloud-sun",st:"En ligne",t:"Météo Mondiale",d:"Application web pour consulter la météo partout dans le monde : choix du pays et de la ville, conditions actuelles (humidité, vent, ressenti, visibilité, pression), prévisions sur 5 jours et page d’analyses avec graphiques.",g:["Application web","Météo","Données","Graphiques"]},
+
+{k:"Safe Abidjan",video:"videos/Safe Abidjan.mp4",type:"Web · Données",ic:"fa-cloud-sun",st:"En ligne",t:"SafeAbidjan",d:"Application web pour conulter les risques a abidjan : choix du pays et de la ville, conditions actuelles (humidité, vent, ressenti, visibilité, pression), prévisions sur 5 jours et page d’analyses avec graphiques.",g:["Application web","Météo","Données","Graphiques"]},
+
+
+ {k:"smart",cover:"cover-finance",type:"Finance · Data · IA",ic:"fa-coins",st:"En développement",t:"Smart Budget IA",d:"Application en développement pour l’analyse comptable et financière : import des données, indicateurs, détection d’anomalies et assistant IA fondé sur les données importées.",g:["Flutter","Python / FastAPI","IA","OHADA"],gh:"https://github.com/matagarik33/KM-Analyse",gl:"Code source"},
+
+ {k:"powerbi",video:"videos/analyse-power-bi.mp4",st:"Data & BI",t:"Analyse de données avec Power BI",d:"Exploration de données, suivi d’indicateurs et visualisations pour faciliter la lecture des résultats.",g:["Power BI","Excel","KPI","Visualisation"]},
+
+ {k:"python",video:"videos/python.mp4",st:"Data · Python",t:"Application d’analyse de données avec Python",d:"Application de démonstration pour explorer les données contenues dans des fichiers et expérimenter des fonctionnalités d’analyse.",g:["Python","CSV","Analyse","IA"],gh:"https://github.com/matagarik33",gl:"Profil GitHub"},
+
+ {k:"flutter",video:"videos/CHAT &GO (4).mp4",st:"Application mobile",t:"Application mobile Flutter",d:"Démonstration d’une application mobile réalisée avec Flutter et Dart, avec une attention portée à l’interface et aux fonctionnalités numériques.",g:["Flutter","Dart","Mobile","UI"]},
+
+ {k:"n8n",video:"",st:"IA & automatisation",t:"Agent IA avec n8n",d:"Expérimentation d’un agent IA avec n8n pour faciliter le traitement de demandes et l’exploitation d’informations.",g:["n8n","Agent IA","OpenAI API","Automatisation"],gh:"https://github.com/matagarik33",gl:"Profil GitHub"},
+
+ {k:"excel",video:"videos/analyse de donnée avec excel.mp4",type:"Data & reporting",ic:"fa-file-excel",st:"Analyse de données",t:"Analyse de données avec Excel",d:"Préparation de tableaux, création d’indicateurs et reporting pour faciliter le suivi des performances.",g:["Excel","KPI","Reporting","Analyse"]}
+
+];
+
+const ext = 'target="_blank" rel="noopener noreferrer"';
+
+function renderProjects() {
+  document.getElementById("projectsGrid").innerHTML = PROJECTS.map(p => {
+    const media = p.video
+      ? `<div class="project-video">
+          <div class="video-label"><i class="fa-solid fa-circle-play"></i> Démonstration vidéo</div>
+          <video controls preload="metadata" playsinline aria-label="Démonstration : ${p.t}" onerror="this.nextElementSibling.hidden = false">
+            <source src="${p.video}" type="video/mp4">
+            Votre navigateur ne prend pas en charge la lecture vidéo.
+          </video>
+          <p class="video-error" hidden>Vidéo introuvable : vérifie que le fichier <code>${p.video}</code> existe bien dans le dossier <code>videos</code>.</p>
+          <a class="video-open-link" href="${p.video}" ${ext}><i class="fa-solid fa-up-right-from-square"></i> Ouvrir la vidéo séparément</a>
+        </div>`
+      : `<div class="project-cover ${p.cover || "cover-finance"}">
+          <span class="project-type">${p.type || p.st || "Projet"}</span>
+          <div class="cover-symbol"><i class="fa-solid ${p.ic || "fa-laptop-code"}"></i></div>
+        </div>`;
+
+    const acts = [
+      DEMO[p.k] && `<a class="project-link" href="${DEMO[p.k]}" ${ext}><i class="fa-solid fa-play"></i> Tester en ligne</a>`,
+      p.gh && `<a class="project-link secondary" href="${p.gh}" ${ext}><i class="fa-brands fa-github"></i> ${p.gl || "Code source"}</a>`
+    ].filter(Boolean).join("");
+
+    return `<article class="project-card">${media}<div class="project-body"><span class="project-status">${p.st}</span><h3>${p.t}</h3><p>${p.d}</p><div class="tags">${p.g.map(x => `<span>${x}</span>`).join("")}</div>${acts ? `<div class="project-actions">${acts}</div>` : ""}</div></article>`;
+  }).join("");
+}
+renderProjects();
+
+
+
+document.getElementById("skillsGrid").innerHTML = [
+
+ ["fa-magnifying-glass-chart","Data Analytics","Préparer et explorer les données pour faire ressortir les tendances et informations utiles.",["Collecte & nettoyage","Analyse exploratoire","Statistiques","Python","Pandas"]],
+
+ ["fa-chart-simple","Business Intelligence","Structurer les résultats et créer des vues claires pour suivre les indicateurs.",["Power BI","Excel","KPI","Reporting","Visualisation"]],
+
+ ["fa-code","Développement","Construire des interfaces et des applications web ou mobiles.",["HTML / CSS","JavaScript","Flutter / Dart","API REST","Git / GitHub"]],
+
+ ["fa-brain","IA & données","Explorer l’IA et l’automatisation pour accélérer les tâches répétitives.",["IA générative","Prompt engineering","Agents IA","n8n","OpenAI API"]]
+
+].map(([i,t,d,l]) => `<article class="skill-card"><div class="skill-icon"><i class="fa-solid ${i}"></i></div><h3>${t}</h3><p>${d}</p><div class="skill-list">${l.map(x => `<span>${x}</span>`).join("")}</div></article>`).join("");
+
+
+
+document.getElementById("certList").innerHTML = [
+
+ ["fa-solid fa-robot","IA générative","Certification","certifications/IA_g_n_rative_Certificate.pdf"],
+
+ ["fa-solid fa-brain","Les bases de l’IA","Certification","certifications/Les_bases_de_l_IA_Certificate.pdf"],
+
+ ["fa-brands fa-python","Python — IBM","Certificat","certifications/IBM certificat python.pdf"]
+
+].map(([i,t,s,h]) => `<a class="cert-item" href="${encodeURI(h)}" ${ext}><span class="cert-icon"><i class="${i}"></i></span><span><strong>${t}</strong><small>${s}</small></span><i class="fa-solid fa-arrow-up-right-from-square"></i></a>`).join("");
+
+
+
+document.getElementById("cvGrid").innerHTML = [
+
+ ["CV Data Analyste junior","Analyse, préparation et visualisation des données, Excel et Power BI.","assets/CV KAMAGATE MATAGARI DATA ANALYSTE JUNIOR.pdf"],
+
+ ["CV Développeuse Full-Stack junior","Développement web et mobile, interfaces et intégration d’API.","assets/CV kamagaté Matagari dévéloppeuse full-stack junior.pdf"],
+
+ ["CV Développement Data & IA","Compétences en développement, données et intelligence artificielle.","assets/CV Kamagaté Matagari développeuse data IA junior 2.pdf"],
+
+ ["CV Développement Web & Mobile","Applications web et mobiles, interfaces et intégration d’API.","assets/CV kamagaté developpeuse web et mobile 3.pdf"]
+
+].map(([t,d,h]) => `<article class="cv-card"><span class="cv-file-icon"><i class="fa-solid fa-file-pdf"></i></span><h3>${t}</h3><p>${d}</p><a href="${encodeURI(h)}" ${ext}><i class="fa-solid fa-download"></i> Ouvrir le CV</a></article>`).join("");
+
+
+
+/* ===== PANNEAU « LIENS DE MES APPLICATIONS » : ouvre la page avec  ?admin  à la fin de l'adresse ===== */
+
+if (new URLSearchParams(location.search).has("admin")) {
+
+ const box = document.createElement("div");
+
+ box.innerHTML = `<button class="adm-btn" id="admBtn" type="button" aria-label="Gérer les liens de mes applications"><i class="fa-solid fa-link"></i></button>
+
+ <div class="adm-ov" id="admOv"><div class="adm-panel" role="dialog" aria-label="Liens de mes applications hébergées">
+
+ <button class="adm-x" id="admX" type="button" aria-label="Fermer">×</button>
+
+ <h3>Liens de mes applications hébergées</h3>
+
+ <p>Colle l'adresse de chaque application en ligne (Vercel, Netlify…). Laisse vide si elle n'est pas encore hébergée.</p>
+
+ <div id="admFields"></div>
+
+ <div class="adm-row"><button class="btn btn-primary" id="admApply" type="button">Aperçu sur la page</button><button class="btn btn-secondary" id="admGen" type="button">Générer le code</button></div>
+
+ <p class="adm-msg" id="admMsg"></p><pre id="admCode" hidden></pre><button class="btn btn-secondary" id="admCopy" type="button" hidden>Copier le code</button>
+
+ </div></div>`;
+
+ document.body.appendChild(box);
+
+ const $ = id => document.getElementById(id), msg = t => $("admMsg").textContent = t;
+
+ const read = () => { const v = {}; let ok = true;
+
+  document.querySelectorAll("#admFields input").forEach(i => { const x = i.value.trim().replace(/"/g, "%22");
+
+   if (x && !/^https?:\/\//i.test(x)) ok = false; v[i.dataset.k] = x; });
+
+  return ok ? v : null; };
+
+ const open = () => { $("admFields").innerHTML = PROJECTS.map(p =>
+
+   `<label>${p.t}<input type="url" data-k="${p.k}" placeholder="https://mon-application.vercel.app" value="${DEMO[p.k] || ""}"></label>`).join("");
+
+  msg(""); $("admCode").hidden = $("admCopy").hidden = true; $("admOv").classList.add("on"); };
+
+ $("admBtn").onclick = open;
+
+ $("admX").onclick = () => $("admOv").classList.remove("on");
+
+ $("admOv").onclick = e => { if (e.target === $("admOv")) $("admOv").classList.remove("on"); };
+
+ $("admApply").onclick = () => { const v = read();
+
+  if (!v) return msg("Un lien est invalide : il doit commencer par https://");
+
+  localStorage.setItem("km_demo", JSON.stringify(v)); Object.assign(DEMO, v); renderProjects();
+
+  msg("Aperçu appliqué, dans ce navigateur seulement. Génère le code pour que tes visiteurs le voient aussi."); };
+
+ $("admGen").onclick = () => { const v = read();
+
+  if (!v) return msg("Un lien est invalide : il doit commencer par https://");
+
+  $("admCode").textContent = "const DEMO = {\n" + PROJECTS.map(p => `  ${p.k}: "${v[p.k] || ""}"`).join(",\n") + "\n};";
+
+  $("admCode").hidden = $("admCopy").hidden = false;
+
+  msg("Copie ce code et remplace la ligne « const DEMO = {…}; » dans ton fichier HTML, puis republie le site."); };
+
+ $("admCopy").onclick = () => navigator.clipboard.writeText($("admCode").textContent).then(() => { $("admCopy").textContent = "Copié !"; setTimeout(() => $("admCopy").textContent = "Copier le code", 1800); });
+
+}
+
+</script>
+
 </body>
+
 </html>
